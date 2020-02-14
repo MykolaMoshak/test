@@ -1,73 +1,108 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set encoding=utf-8
+syntax on
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-"highlight mathcing [{()}] 
-set showmatch
-set wildmenu
-set cursorline
 call vundle#begin()
-
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-"Add hier your Plugins you want to use
-
 " let Vundle manage Vundle, required
-"Vundle Vim is a plugin that meneges all Plugins we want to add
 Plugin 'VundleVim/Vundle.vim'
-"Plugin that allows us to you autocomplete
-Plugin 'Valloric/YouCompleteMe'
-"Plugin to see the rooth with another files in current directory
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
 Plugin 'scrooloose/nerdtree'
-"Plugin with color schemes
-Plugin 'morhetz/gruvbox'
-"Plugin for auto complete for brackets
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
-"Plugin for versioning  and git
-Plugin 'tpope/vim-fugitive' 
-"Plugin shows + or - if we have added or delete a line
-Plugin 'airblade/vim-gitgutter'
-"Plugin that make fast navigate in the project
-Plugin 'kien/ctrlp.vim'
-"Plugin for easy motion in source files
-Plugin 'easymotion/vim-easymotion'
-"Plugin for editing C/C++ Code
-Plugin 'c.vim'
+Plugin 'rdnetto/YCM-Generator'
+"Plugin 'rip-rip/clang_complete'
+ 
+" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-"Color Scheme
-colorscheme gruvbox
-highlight clear
-highlight CursorLine ctermbg=Blue ctermfg=White
-set background=dark
-"Enable colomn nuber
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+set showcmd		" Show (partial) command in status line.
+set showmatch		" Show matching brackets.
+set ignorecase		" Do case insensitive matching
+set smartcase		" Do smart case matching
+set incsearch		" Incremental search
+"set autowrite		" Automatically save before commands like :next and :make
+"set hidden		" Hide buffers when they are abandoned
+"set mouse=a		" Enable mouse usage (all modes)
+
+" Add spaces after comment delimiters by default
+ let g:NERDSpaceDelims = 1
+"
+" " Use compact syntax for prettified multi-line comments
+ let g:NERDCompactSexyComs = 1
+"
+" " Align line-wise comment delimiters flush left instead of following code
+" indentation
+ let g:NERDDefaultAlign = 'left'
+"
+" " Set a language to use its alternate delimiters by default
+" let g:NERDAltDelims_java = 1
+"
+" " Add your own custom formats or override the defaults
+ let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+"
+" " Allow commenting and inverting empty lines (useful when commenting a
+" region)
+ let g:NERDCommentEmptyLines = 1
+"
+" " Enable trimming of trailing whitespace when uncommenting
+" let g:NERDTrimTrailingWhitespace = 1
+"
+" " Enable NERDCommenterToggle to check all selected lines is commented or not 
+" let g:NERDToggleCheckAllLines = 1
+
+let g:AutoPairsFlyMode = 1
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
+"let g:clang_library_path = "/home/kami/Qt/Tools/QtCreator/lib/qtcreator"
+"let g:clang_use_library = 1
+"let b:clang_user_options = '-std=c++11'
+"let g:SuperTabDefaultCompletionType = 'context'
+"let g:SuperTabContextDefaultCompletionType = '<c-x><c-u>'
+"let g:clang_complete_auto = 1
+"let g:clang_debug = 1
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * p 
 set number
-"Enable displaying a current cursor position
-set ruler
-"Enable tab that equal 2 spaces
-set expandtab
-set tabstop=2
-"Enable Search with highliting
-set hlsearch
-"Enable Search with highlituing with typing only first few first letters
-set incsearch
-"Set the length of the line
-"Set the highlign for length limit of line
-set textwidth=120
-set colorcolumn=+1
-set backspace=indent,eol,start
+map <C-b> :NERDTreeToggle<CR>
+nnoremap <C-g> :YcmCompleter GoTo<CR>
+set tags=tags
+set bs=2
+autocmd BufRead,BufNewFile *.launch setfiletype roslaunch
+set mouse=a
+set laststatus=2
+set statusline+=%F
 
-
-let g:mapleader=','
-
-
-
-
-"Enable syntax
-syntax on
-
-"Mappings
-map <C-n> :NERDTreeToggle<CR>
-map <Leader> <Plug>(easymotion-prefix)
