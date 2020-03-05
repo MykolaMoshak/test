@@ -105,4 +105,9 @@ autocmd BufRead,BufNewFile *.launch setfiletype roslaunch
 set mouse=a
 set laststatus=2
 set statusline+=%F
-
+color desert
+set cursorline
+"hi CursorLine term=bold cterm=bold guibg=Grey40
+"hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white 
+hi clear CursorLine
+hi CursorLine gui=underline cterm=bold,underline  term=bold,underline guibg=Grey40 
